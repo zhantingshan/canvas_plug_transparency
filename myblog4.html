@@ -28,6 +28,7 @@ ul {
 	width: 100%;
 }
 li {
+	position:relative;
 	float: left;
 	list-style-type: none;
 	height: 31px;
@@ -38,35 +39,16 @@ li {
 	z-index: 10;
 	font-weight: 800;
 	background-color: #40D9FF;
+	left:2000px;
 }
 .nav {
 	position: absolute;
 	top: 10px;
-	left: 0px;
+	left: 105px;
 	width: 100%;
 }
 </style>
 <style id="menu">
-.nav {
-	animation: mymove 1s 1;
-	-webkit-animation: mymove 1s 1; /*Safari and Chrome*/
-}
- @keyframes menu_move {
- from {
-left:300px;
-}
-to {
-	left:0px;
-}
-}
- @-webkit-keyframes mymove /*Safari and Chrome*/ {
- from {
-left:300px;
-}
-to {
-	left:0px;
-}
-}
 </style>
 <script></script>
 </head>
@@ -74,10 +56,10 @@ to {
 <div class="head">
   <div class="nav">
     <ul>
-      <li>你好。</li>
-      <li>你你你</li>
-      <li>你好。</li>
-      <li>你好。</li>
+      <li id="list1">你好。</li>
+      <li id="list2">你你你</li>
+      <li id="list3">你好。</li>
+      <li id="list4">你好。</li>
     </ul>
   </div>
 </div>
@@ -164,8 +146,8 @@ to {
              
              //字体最大为145
              word_size+=1;
-             if(word_size>=145){
-                 word_size=145;
+             if(word_size>=100){
+                 word_size=100;
              }
              
              
@@ -272,6 +254,7 @@ to {
 					        //使menu2y不超过顶，不过超了好像也没什么
 							menu2y=0;
 							clearInterval(timer2);
+							list_move();
 							}
                     
 					if(menu_flag==0){
@@ -305,10 +288,16 @@ to {
 					
 					                                     
                     }	
+					
+					 function list_move(){
+				        var list=document.getElementById("menu");
+						list.innerHTML="li{left: 0px;animation: mymove 1s 1; -webkit-animation: mymove 1s 1; /*Safari and Chrome*/} @keyframesmenu_move { from {left:300px;}to {left:0px;}}@-webkit-keyframes mymove /*Safari and Chrome*/ {from {left:300px;}to {left:0px;}}";
+												
+						}
                   
             }  
           pageInit();
-          
+         
           
           
   </script>
