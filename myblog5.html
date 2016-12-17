@@ -95,6 +95,7 @@ li {
    var wordy=225;
    var word_angle;
    var word_flag=0;//0-up,1-dowm
+   var stop_flag=0;
    
    //此参数不能用，原因ditto，直接用document.getElementsByClassName('head')[0].clientWidth*4可行
    var max_wordx=CANVAS_WIDTH*4;
@@ -150,8 +151,8 @@ li {
              
              //字体最大为145
              word_size+=1;
-             if(word_size>=100){
-                 word_size=100;
+             if(word_size>=150){
+                 word_size=150;
              }
              
              
@@ -195,7 +196,7 @@ li {
                  
                  //文字移动的距离
                  jumpy=Math.cos(word_angle) * word_speed;
-                 jumpx=-Math.sin(word_angle) * word_speed;
+                 jumpx=Math.sin(word_angle) * word_speed;
                  
                  //文字减去移动的距离 
                  wordx+=jumpx;
@@ -229,11 +230,14 @@ li {
                }
                
                //设置字体的停止位置
-              if(wordx>=document.getElementsByClassName('head')[0].clientWidth*0.55){	
+              if(wordx>=document.getElementsByClassName('head')[0].clientWidth*0.55 && stop_flag==0){	
                      wordx=document.getElementsByClassName('head')[0].clientWidth*0.55-1;
                      wordy=250-word_size;
                      clearInterval(timer1);
+					 stop_flag=1;
                      moveMask();
+					 //以防无限循环
+					 
 					 timer2 =setInterval(menu,20);  
                 } 
               
@@ -295,7 +299,7 @@ li {
 					
 					 function list_move(){
 				        var list=document.getElementById("menu");
-						/*1.animation-fill-mode 设定动画完成后的状态，默认是none 设为forwards 就可以在动画完成后定格在动画最后一帧
+						/*1.animation-fill-mode 设定动画完成后的状态，默认是none 设为forwards 就可以在动画完成后定格在动画最后一帧;ie用不了；
 						2.*/
 						list.innerHTML="#list1{animation: mymove 1s 1; -webkit-animation: mymove 1s; animation-fill-mode:forwards;} #list2{animation: mymove 1s; -webkit-animation: mymove 1s 1; animation-delay:2s;-webkit-animation-delay:1s;animation-fill-mode:forwards; }#list3{animation: mymove 1s 1; -webkit-animation: mymove 1s; animation-delay:2s;-webkit-animation-delay:2s; animation-fill-mode:forwards;}#list4{animation: mymove 1s 1; -webkit-animation: mymove 1s; animation-delay:2s;-webkit-animation-delay:3s;animation-fill-mode:forwards;}@keyframes mymove { from {left:2000px;}to {left:0;} } @-webkit-keyframes mymove /*Safari and Chrome*/ {from {left:2000px;}to {left:0;}}";
 									
