@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	width: 100%;
+	
+
+}
+.head {
+	height: 180px;
+	background-image: url(../image/head.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	top: 0;
+	width: 100%;
+	overflow-x: hidden;
+}
+canvas {
+	display: block;
+}
+ul {
+	width: 2000px;
+}
+li {
+	position: relative;
+	float: left;
+	list-style-type: none;
+	height: 31px;
+	text-align: center;
+	line-height: 31px;
+	border: 2px solid #696969;
+	color: #2F4F4F;
+	z-index: 10;
+	font-weight: 900;
+	font-size: 18px;
+	cursor: pointer;
+	overflow: hidden;
+	background-color: rgba(47,79,79,0.2);
+	padding:0 10px;
+	
+}
+li li {
+	float: none;
+	border: 0;
+    overflow: visible;
+	position:relative;
+	white-space:nowrap;
+	text-align:left;
+	
+
+	
+}
+ul ul {
+	position: absolute;
+	margin-left: -10px;
+	width:auto;	
+}
+#list1 {
+	left: 2000px;
+}
+#list2 {
+	left: 2000px;
+}
+#list3 {
+	left: 2000px;
+}
+#list4 {
+	left: 2000px;
+}
+.nav {
+	position: absolute;
+	top: 10px;
+	left: 105px;
+	width: 100%;
+}
+.firstl>li:hover {
+	overflow: visible;
+}
+li:hover {
+	font-size: 24px;
+	color: #BEBEBE;
+}

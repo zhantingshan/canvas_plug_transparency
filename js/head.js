@@ -1,99 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="gbk">
-<title>ÊµÏÖµÄÕÚÕÖ¶¯»­</title>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-}
-body {
-	width: 100%;
-	overflow:hidden;
-}
-.head {
-	height: 180px;
-	background-image: url(head.jpg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: relative;
-	top: 0;
-	width: 100%
-}
-canvas {
-	display: block;
-}
-ul {
-	width:2000px;
-}
-li {
-	position:relative;
-	float: left;
-	list-style-type: none;
-	height: 31px;
-	text-align: center;
-	line-height: 31px;
-	border: 2px solid #696969;
-	color: #2F4F4F;
-	z-index: 10;
-	font-weight: 900;
-	width:80px;
-	font-size:18px;
-	cursor:pointer;
-    overflow: hidden;
-	background-color:rgba(47,79,79,0.2);
-}
-li li{float: none;  border:0;}
-ul ul{
-	position: absolute;
-	margin-left:-2px;
-	
-	}	
-
-#list1{left:2000px;}
-#list2{left:2000px;}
-#list3{left:2000px;}
-#list4{left:2000px;}
-.nav {
-	position: absolute;
-	top: 10px;
-	left: 105px;
-	width: 100%;
-}
-.firstl>li:hover{ overflow: visible; }
-li:hover{ font-size:24px; color:#BEBEBE;}
-</style>
-<style id="menu">
-</style>
-<script></script>
-</head>
-<body>
-<div class="head">
-  <div class="nav">
-    <ul class="firstl">
-      <li id="list1"><a>ÄãºÃ</a><ul class="first2">
-      <li id=""><a>ÄãºÃ</a></li>
-      <li id=""><a>ÄãºÃ</a></li>
-      <li id=""><a>ÄãºÃ</a></li>
-      <li id=""><a>ÄãºÃ</a></li>
-    </ul></li>
-      <li id="list2"><a>ÄãºÃ</a></li>
-      <li id="list3"><a>ÄãºÃ</a></li>
-      
-      <li id="list4"><a>ÄãºÃ</a><ul class="first2">
-      <li id=""><a>ÄãºÃ</a></li>
-      <li id=""><a>ÄãºÃ</a></li>
-      <li id=""><a>ÄãºÃ</a></li>
-      <li id=""><a>ÄãºÃ</a></li>
-    </ul></li>
-    
-    </ul>
-  </div>
-</div>
-<script> 
-  var imageCanvas;  
+// JavaScript Document
+ var imageCanvas;  
    var maskCanvas;  
    var imageContext;  
    var maskContext;  
@@ -106,8 +12,8 @@ li:hover{ font-size:24px; color:#BEBEBE;}
    var MASK_R=25;
    var mask_bgcolor='rgba(139,139,122,0.8)';
    
-    /*??ÓĞÊ±CANVAS_WIDTH£¡=document.getElementsByClassName('head')[0].clientWidth£»
-     i don't know why,ÊÇÒòÎªbodyÃ»Éèoverflow:hidden;£¿*/
+    /*??æœ‰æ—¶CANVAS_WIDTHï¼=document.getElementsByClassName('head')[0].clientWidthï¼›
+     i don't know why,æ˜¯å› ä¸ºbodyæ²¡è®¾overflow:hidden;ï¼Ÿ*/
    var CANVAS_WIDTH=document.getElementsByClassName('head')[0].clientWidth;
    var head_height=document.getElementsByClassName('head')[0].clientHeight;
    var CANVAS_HEIGHT=head_height;  
@@ -123,12 +29,12 @@ li:hover{ font-size:24px; color:#BEBEBE;}
    var word_flag=0;//0-up,1-dowm
    var stop_flag=0;
    
-   //´Ë²ÎÊı²»ÄÜÓÃ£¬Ô­Òòditto£¬Ö±½ÓÓÃdocument.getElementsByClassName('head')[0].clientWidth*4¿ÉĞĞ
+   //æ­¤å‚æ•°ä¸èƒ½ç”¨ï¼ŒåŸå› dittoï¼Œç›´æ¥ç”¨document.getElementsByClassName('head')[0].clientWidth*4å¯è¡Œ
    var max_wordx=CANVAS_WIDTH*4;
    var timer1;
    var timer2;
    
-   var menu_speed=35;//²Ëµ¥ÏßËÙ¶È
+   var menu_speed=35;//èœå•çº¿é€Ÿåº¦
    var menu1x=document.getElementsByClassName('head')[0].clientWidth;
    var menu1y=50;
    var menu1_long=menu1x+150;
@@ -140,7 +46,7 @@ li:hover{ font-size:24px; color:#BEBEBE;}
 
             function pageInit(){  		
             
-                //´´½¨Í¼Æ¬canvas±êÇ©  
+                //åˆ›å»ºå›¾ç‰‡canvasæ ‡ç­¾  
                 maskCanvas=document.createElement("canvas");  
                 maskCanvas.width=CANVAS_WIDTH;  
                 maskCanvas.height=CANVAS_HEIGHT;  
@@ -152,22 +58,22 @@ li:hover{ font-size:24px; color:#BEBEBE;}
    
    
             function moveMask(){  
-                //ÔÚ¸ø¶¨¾ØĞÎÄÚÇå¿ÕÒ»¸ö¾ØĞÎ,Çå¿ÕÔ­À´µÄcan£º
+                //åœ¨ç»™å®šçŸ©å½¢å†…æ¸…ç©ºä¸€ä¸ªçŸ©å½¢,æ¸…ç©ºåŸæ¥çš„canï¼š
                 maskContext.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);  
-                //ÏÂÃæ¸²¸ÇÉÏÃæ
+                //ä¸‹é¢è¦†ç›–ä¸Šé¢
                 maskContext.globalCompositeOperation="source-over";  
                 maskContext.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);  
-                //ÉÏÃæ¸²¸ÇÏÂÃæ
+                //ä¸Šé¢è¦†ç›–ä¸‹é¢
                 maskContext.globalCompositeOperation="destination-out"; 
-                //ÉèÖÃÌî³äÉ«
+                //è®¾ç½®å¡«å……è‰²
                 maskContext.fillStyle=mask_bgcolor;
-                //Ö´ĞĞÌî³ä 
+                //æ‰§è¡Œå¡«å…… 
                 maskContext.fill(); 
-                //ÖØÖÃµ±Ç°µÄÂ·¾¶
+                //é‡ç½®å½“å‰çš„è·¯å¾„
                 maskContext.font = 'bold '+word_size+'px arial';
                 maskContext.textAlign = 'left';
                 maskContext.textBaseline = 'top';
-                //Ğ´ÎÄ×Öw3school.com.cn £¬×ø±ê10,90
+                //å†™æ–‡å­—w3school.com.cn ï¼Œåæ ‡10,90
                 maskContext.fillText("ZTS.blog",wordx,wordy);
                                
                 jump();
@@ -175,7 +81,7 @@ li:hover{ font-size:24px; color:#BEBEBE;}
                 
           function jump(){			 
              
-             //×ÖÌå×î´óÎª145
+             //å­—ä½“æœ€å¤§ä¸º145
              word_size+=1.2;
              if(word_size>=150){
                  word_size=150;
@@ -195,18 +101,18 @@ li:hover{ font-size:24px; color:#BEBEBE;}
              
              
              function jump_up(){
-                 //ÉÏÒÆ½Ç¶ÈÔ¼55¶È
+                 //ä¸Šç§»è§’åº¦çº¦55åº¦
                  word_angle=0.3*Math.PI;
-                 //¼ÓËÙ¶È£¬ÔÚ¶¥Ê±Îª1£¬ÔÚµ×µ½´ï×î´óÈ»ºó¿ªÊ¼¼õ
+                 //åŠ é€Ÿåº¦ï¼Œåœ¨é¡¶æ—¶ä¸º1ï¼Œåœ¨åº•åˆ°è¾¾æœ€å¤§ç„¶åå¼€å§‹å‡
                  speed-=0.001;
-                 //Ô­ÒÆ¶¯¾àÀë¼õÈ¥¼ÓËÙ¶È£¬ÏòÉÏÒª¼õËÙ
+                 //åŸç§»åŠ¨è·ç¦»å‡å»åŠ é€Ÿåº¦ï¼Œå‘ä¸Šè¦å‡é€Ÿ
                  word_speed+=speed;
                  
-                 //ÎÄ×ÖÒÆ¶¯µÄ¾àÀë
+                 //æ–‡å­—ç§»åŠ¨çš„è·ç¦»
                 jumpx=Math.cos(word_angle) * word_speed;
                 jumpy=Math.sin(word_angle) * word_speed;
                              
-                 //ÎÄ×Ö¼ÓÉÏÒÆ¶¯µÄ¾àÀë
+                 //æ–‡å­—åŠ ä¸Šç§»åŠ¨çš„è·ç¦»
                  wordx+=jumpx;
                  wordy=wordy-jumpy; 
                  
@@ -214,17 +120,17 @@ li:hover{ font-size:24px; color:#BEBEBE;}
                  }
               
               function jump_down(){
-                  //ÏÂÒÆ½Ç¶ÈÔ¼20¶È
+                  //ä¸‹ç§»è§’åº¦çº¦20åº¦
                   word_angle=0.1*Math.PI;
                   speed+=0.01;
-                 //Ô­ÒÆ¶¯¾àÀë¼õÈ¥¼ÓËÙ¶È£¬ÏòÏÂÒª¼ÓËÙ 
+                 //åŸç§»åŠ¨è·ç¦»å‡å»åŠ é€Ÿåº¦ï¼Œå‘ä¸‹è¦åŠ é€Ÿ 
                  word_speed+=speed; 
                  
-                 //ÎÄ×ÖÒÆ¶¯µÄ¾àÀë
+                 //æ–‡å­—ç§»åŠ¨çš„è·ç¦»
                  jumpy=Math.cos(word_angle) * word_speed;
                  jumpx=Math.sin(word_angle) * word_speed;
                  
-                 //ÎÄ×Ö¼õÈ¥ÒÆ¶¯µÄ¾àÀë 
+                 //æ–‡å­—å‡å»ç§»åŠ¨çš„è·ç¦» 
                  wordx+=jumpx;
                  wordy+=jumpy; 
                  
@@ -240,29 +146,29 @@ li:hover{ font-size:24px; color:#BEBEBE;}
                   
                }
                
-               //ÉèÖÃ×ÖÌåµ×²¿Î»ÖÃ
+               //è®¾ç½®å­—ä½“åº•éƒ¨ä½ç½®
                if(wordy+word_size>=head_height)
               {  
-                 //±£Ö¤Ìø¶¯²»³¬µ×
+                 //ä¿è¯è·³åŠ¨ä¸è¶…åº•
                  wordy=head_height-word_size;	
                  word_flag=0;
-                 //Ã¿´ÎËùÌø×î¸ßµã½µµÍ
+                 //æ¯æ¬¡æ‰€è·³æœ€é«˜ç‚¹é™ä½
                  jump_hight+=8;
-                 //ËÙ¶ÈÖØÖÃ			                 
+                 //é€Ÿåº¦é‡ç½®			                 
                  speed=1;
                  
                   
                               
                }
                
-               //ÉèÖÃ×ÖÌåµÄÍ£Ö¹Î»ÖÃ
+               //è®¾ç½®å­—ä½“çš„åœæ­¢ä½ç½®
               if(wordx>=document.getElementsByClassName('head')[0].clientWidth*0.55 && stop_flag==0){	
                      wordx=document.getElementsByClassName('head')[0].clientWidth*0.55-1;
                      wordy=head_height-word_size;
                      clearInterval(timer1);
 					 stop_flag=1;
                      moveMask();
-					 //ÒÔ·ÀÎŞÏŞÑ­»·
+					 //ä»¥é˜²æ— é™å¾ªç¯
 					 
 					 timer2 =setInterval(menu,20);  
                 } 
@@ -271,23 +177,23 @@ li:hover{ font-size:24px; color:#BEBEBE;}
               }
               
 			  
-			//²Ëµ¥Ïß    
+			//èœå•çº¿    
             function menu(){
 				    
-					//menu1»­µ½¶¥Ê±Í£Ö¹
+					//menu1ç”»åˆ°é¡¶æ—¶åœæ­¢
                    if(menu1x<=0&&menu_flag==0){
 							menu1x=0;
-							//menu1Íê³É±êÊ¶
+							//menu1å®Œæˆæ ‡è¯†
 							menu_flag=1;
-							//ĞèÔÚÔÙÖ´ĞĞÒ»´Î£¬²ÅÄÜµ½¶¥£»
+							//éœ€åœ¨å†æ‰§è¡Œä¸€æ¬¡ï¼Œæ‰èƒ½åˆ°é¡¶ï¼›
 							menu1_move();
-							//²Ëµ¥Ñ¡Ïîµ¯³ö
+							//èœå•é€‰é¡¹å¼¹å‡º
 							list_move();
 							}
 							
-					//menu2»­µ½¶¥Ê±Í£Ö¹£¬²¢ÖÕÖ¹interval	
+					//menu2ç”»åˆ°é¡¶æ—¶åœæ­¢ï¼Œå¹¶ç»ˆæ­¢interval	
 				   if(menu2y<=0){
-					        //Ê¹menu2y²»³¬¹ı¶¥£¬²»¹ı³¬ÁËºÃÏñÒ²Ã»Ê²Ã´
+					        //ä½¿menu2yä¸è¶…è¿‡é¡¶ï¼Œä¸è¿‡è¶…äº†å¥½åƒä¹Ÿæ²¡ä»€ä¹ˆ
 							menu2y=0;
 							clearInterval(timer2);
 							
@@ -327,7 +233,7 @@ li:hover{ font-size:24px; color:#BEBEBE;}
 					
 					 function list_move(){
 				        var list=document.getElementById("menu");
-						/*1.animation-fill-mode Éè¶¨¶¯»­Íê³ÉºóµÄ×´Ì¬£¬Ä¬ÈÏÊÇnone ÉèÎªforwards ¾Í¿ÉÒÔÔÚ¶¯»­Íê³Éºó¶¨¸ñÔÚ¶¯»­×îºóÒ»Ö¡;ieÓÃ²»ÁË£»
+						/*1.animation-fill-mode è®¾å®šåŠ¨ç”»å®Œæˆåçš„çŠ¶æ€ï¼Œé»˜è®¤æ˜¯none è®¾ä¸ºforwards å°±å¯ä»¥åœ¨åŠ¨ç”»å®Œæˆåå®šæ ¼åœ¨åŠ¨ç”»æœ€åä¸€å¸§;ieç”¨ä¸äº†ï¼›
 						2.*/
 						list.innerHTML="#list1{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-fill-mode:forwards;} #list2{animation: mymove 0.5s; -webkit-animation: mymove 0.5s 1; animation-delay:0.5s;-webkit-animation-delay:0.5s;animation-fill-mode:forwards; }#list3{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-delay:1s;-webkit-animation-delay:1s; animation-fill-mode:forwards;}#list4{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-delay:1.5s;-webkit-animation-delay:1.5s;animation-fill-mode:forwards;}@keyframes mymove { from {left:2000px;}to {left:0;} } @-webkit-keyframes mymove /*Safari and Chrome*/ {from {left:2000px;}to {left:0;}}";
 									
@@ -335,11 +241,5 @@ li:hover{ font-size:24px; color:#BEBEBE;}
                  
             }  
           pageInit();
-		  
-		
          
           
-          
-  </script>
-</body>
-</html>

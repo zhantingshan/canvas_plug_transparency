@@ -64,6 +64,9 @@ ul ul{
 }
 .firstl>li:hover{ overflow: visible; }
 li:hover{ font-size:24px; color:#BEBEBE;}
+.list1{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-fill-mode:forwards;}
+@keyframes mymove { from {left:2000px;}to {left:0;} } 
+@-webkit-keyframes mymove /*Safari and Chrome*/ {from {left:2000px;}to {left:0;}}
 </style>
 <style id="menu">
 </style>
@@ -73,7 +76,7 @@ li:hover{ font-size:24px; color:#BEBEBE;}
 <div class="head">
   <div class="nav">
     <ul class="firstl">
-      <li id="list1"><a>你好</a><ul class="first2">
+      <li id="list1" ><a>你好</a><ul class="first2">
       <li id=""><a>你好</a></li>
       <li id=""><a>你好</a></li>
       <li id=""><a>你好</a></li>
@@ -326,17 +329,13 @@ li:hover{ font-size:24px; color:#BEBEBE;}
                     }	
 					
 					 function list_move(){
-				        var list=document.getElementById("menu");
-						/*1.animation-fill-mode 设定动画完成后的状态，默认是none 设为forwards 就可以在动画完成后定格在动画最后一帧;ie用不了；
-						2.*/
-						list.innerHTML="#list1{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-fill-mode:forwards;} #list2{animation: mymove 0.5s; -webkit-animation: mymove 0.5s 1; animation-delay:0.5s;-webkit-animation-delay:0.5s;animation-fill-mode:forwards; }#list3{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-delay:1s;-webkit-animation-delay:1s; animation-fill-mode:forwards;}#list4{animation: mymove 0.5s 1; -webkit-animation: mymove 0.5s; animation-delay:1.5s;-webkit-animation-delay:1.5s;animation-fill-mode:forwards;}@keyframes mymove { from {left:2000px;}to {left:0;} } @-webkit-keyframes mymove /*Safari and Chrome*/ {from {left:2000px;}to {left:0;}}";
+				       var list1=document.getElementById("list1");
+					   list1.className="list1";
 									
 						}
                  
             }  
           pageInit();
-		  
-		
          
           
           

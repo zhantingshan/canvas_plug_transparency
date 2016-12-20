@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="gbk">
+<title>实现的遮罩动画</title>
+<link rel="stylesheet" type="text/css" href="css/head.css"/>
+<style id="menu"></style>
+<style>
+.content {
+	width: 100%;
+ background: -webkit-linear-gradient(left, #E7E7E7 1%, #FFF50%, #E7E7E7 ); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #E7E7E7 1%, #FFF 50%, #E7E7E7 ); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #E7E7E7 1%, #FFF 50%, #E7E7E7 ); /* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #E7E7E7 1%, #FFF 50%, #E7E7E7 ); /* 标准的语法（必须放在最后） */
+}
+.center {
+	width: 1000px;
+	position: relative;
+	height: 1100px;
+	left: 50%;
+	margin-left: -510px;
+	box-shadow: #2F4F4F 0 0 10px 5px;
+	padding: 10px;
+}
+.center:hover {
+	box-shadow: #2F4F4F 0 0 20px 5px;
+}
+.slide {
+	width: 600px;
+	height: 350px;
+	border: 1px solid #30F;
+	margin-right: 10px;
+	position: relative;
+}
+.motto {
+	width: 375px;
+	height: 350px;
+	border: 1px solid #30F;
+}
+.inline {
+	display: inline-block;
+ *display:inline;
+ *zoom:1;
+	font-size: 0;
+	line-height: 0;
+}
+#bottom {
+	width: 600px;
+	height: 350px;
+	background-image:url(image/3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: absolute;
+}
+.cover {
+	width: 600px;
+	height: 350px;
+	background-image: url(image/2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: absolute;
+}
+.cover1 {
+	clip: rect(auto,300px,175px,auto);
+	animation: cover1  2s ;
+	-webkit-animation: cover1  2s;
+	animation-fill-mode: forwards;
+}
+.cover2 {
+	clip: rect(auto, auto,175px,300px);
+	animation: cover2  2s ;
+	-webkit-animation: cover2  2s;
+	animation-fill-mode: forwards;
+	
+}
+.cover3 {
+	clip: rect(175px,300px,auto, auto);
+	animation: cover3  2s ;
+	-webkit-animation: cover3  2s;
+	animation-fill-mode: forwards;
+	
+}
+.cover4 {
+	clip: rect(175px,auto,auto,300px );
+	animation: cover4  2s ;
+	-webkit-animation: cover4  2s;
+	animation-fill-mode: forwards;
+}
+@keyframes cover1 {
+from {
+background-position: 0 0;
+}
+to {
+background-position: 300px 0;
+}
+}
+@-webkit-keyframes cover1 /*Safari and Chrome*/ {
+from {
+background-position: 0 0;
+}
+to {
+background-position: 300px 0;
+}
+}
+@keyframes cover2 {
+from {
+background-position: 0 0;
+}
+to {
+background-position: 0 175px;
+}
+}
+@-webkit-keyframes cover2 /*Safari and Chrome*/ {
+from {
+background-position: 0 0;
+}
+to {
+background-position: 0 175px;
+}
+}
+@keyframes cover3 {
+from {
+background-position: 0 0;
+}
+to {
+background-position: 0 -175px;
+}
+}
+@-webkit-keyframes cover3 /*Safari and Chrome*/ {
+from {
+background-position: 0 0;
+}
+to {
+background-position: 0 -175px;
+}
+}
+
+@keyframes cover4 {
+from {
+background-position: 0 0;
+}
+to {
+background-position: -300px 0;
+}
+}
+@-webkit-keyframes cover4 /*Safari and Chrome*/ {
+from {
+background-position: 0 0;
+}
+to {
+background-position: -300px 0;
+}
+}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="head">
+    <div class="nav">
+      <ul class="firstl">
+        <li id="list1"><a>首页</a>
+          <ul class="first2">
+            <li id=""><a>fuck you</a></li>
+            <li id=""><a>你好</a></li>
+            <li id=""><a>你好</a></li>
+            <li id=""><a>你好</a></li>
+          </ul>
+        </li>
+        <li id="list2"><a>文章推荐</a></li>
+        <li id="list3"><a>学无止境</a></li>
+        <li id="list4"><a>关于我</a>
+          <ul class="first2">
+            <li id=""><a>你好</a></li>
+            <li id=""><a>你好</a></li>
+            <li id=""><a>你好</a></li>
+            <li id=""><a>你好</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="content">
+    <div class="center">
+      <div class="first_line">
+        <div class="slide inline">
+          <div id="bottom"></div>
+          <div class="cover cover1" id="cover1" ></div>
+          <div class="cover cover2" id="cover2"></div>
+          <div class="cover cover3" id="cover3"></div>
+          <div class="cover cover4" id="cover4"></div>
+        </div>
+        <div class="motto inline"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="js/head.js" type="text/javascript"></script> 
+<script>
+  function slide(){
+			  var bottom=document.getElementById("bottom");
+			  var bottom_clone=cover.cloneNode(true);
+			  var cover1=bottom_clone;
+			  var cover2=bottom_clone;
+			  var cover3=bottom_clone;
+			  var cover4=bottom_clone;
+			  cover1.className="cover1";
+			  cover2.className="cover2";
+			  cover3.className="cover3";
+			  cover4.className="cover4";
+			  bottom.style.backgroundImage="";
+			  }
+
+</script>
+</body>
+</html>
