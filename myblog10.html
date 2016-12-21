@@ -4,146 +4,57 @@
 <meta charset="gbk">
 <title>实现的遮罩动画</title>
 <link rel="stylesheet" type="text/css" href="css/head.css"/>
+<link rel="stylesheet" type="text/css" href="css/slide_1.css"/>
 <style id="menu"></style>
 <style>
-.content {
+img {
 	width: 100%;
- background: -webkit-linear-gradient(left, #E7E7E7 1%, #FFF50%, #E7E7E7 ); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #E7E7E7 1%, #FFF 50%, #E7E7E7 ); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #E7E7E7 1%, #FFF 50%, #E7E7E7 ); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #E7E7E7 1%, #FFF 50%, #E7E7E7 ); /* 标准的语法（必须放在最后） */
-}
-.center {
-	width: 1000px;
-	position: relative;
-	height: 1100px;
-	left: 50%;
-	margin-left: -510px;
-	box-shadow: #2F4F4F 0 0 10px 5px;
-	padding: 10px;
-}
-.center:hover {
-	box-shadow: #2F4F4F 0 0 20px 5px;
-}
-.slide {
-	width: 600px;
-	height: 350px;
-	border: 1px solid #30F;
-	margin-right: 10px;
-	position: relative;
-}
-.motto {
-	width: 375px;
-	height: 350px;
-	border: 1px solid #30F;
-}
-.inline {
-	display: inline-block;
- *display:inline;
- *zoom:1;
-	font-size: 0;
-	line-height: 0;
-}
-#bottom {
-	width: 600px;
-	height: 350px;
-	background-image:url(image/1.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
+	display: block;
 	position: absolute;
 }
-.cover1 {
-	clip: rect(auto,300px,175px,auto);
-	animation: cover1  2s ;
-	-webkit-animation: cover1  2s;
-	animation-fill-mode: forwards;
+.front {
+	z-index: 10;
 }
-.cover2 {
-	clip: rect(auto, auto,175px,300px);
-	animation: cover2  2s ;
-	-webkit-animation: cover2  2s;
-	animation-fill-mode: forwards;
+.front, .back {
+	backface-visibility: hidden;
 	
+	top: 0;
+	left: 0;
 }
-.cover3 {
-	clip: rect(175px,300px,auto, auto);
-	animation: cover3  2s ;
-	-webkit-animation: cover3  2s;
-	animation-fill-mode: forwards;
-	
+.flip_contain:hover .fliper, .flip-contain.hover .flipper {
+	transform: rotateY(180deg);
 }
-.cover4 {
-	clip: rect(175px,auto,auto,300px );
-	animation: cover4  2s ;
-	-webkit-animation: cover4  2s;
-	animation-fill-mode: forwards;
+.flip_contain {
+	perspective: 1000;
+	float: left;
+	padding-right: 10px;
+	width: 50%;
+	margin-top:10px;
 }
-@keyframes cover1 {
-from {
-background-position: 0 0;
+.flip_contain2 {
+	perspective: 1000;
+	float: left;
+	padding-right: 10px;
+	width: 50%;
+	margin-top:10px;
 }
-to {
-background-position: 300px 0;
+.back {
+	transform: rotateY(180deg);
 }
+.blank {
+	z-index: -10;
+	position: relative;
 }
-@-webkit-keyframes cover1 /*Safari and Chrome*/ {
-from {
-background-position: 0 0;
+.fliper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
 }
-to {
-background-position: 300px 0;
+.box_size {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
-}
-@keyframes cover2 {
-from {
-background-position: 0 0;
-}
-to {
-background-position: 0 175px;
-}
-}
-@-webkit-keyframes cover2 /*Safari and Chrome*/ {
-from {
-background-position: 0 0;
-}
-to {
-background-position: 0 175px;
-}
-}
-@keyframes cover3 {
-from {
-background-position: 0 0;
-}
-to {
-background-position: 0 -175px;
-}
-}
-@-webkit-keyframes cover3 /*Safari and Chrome*/ {
-from {
-background-position: 0 0;
-}
-to {
-background-position: 0 -175px;
-}
-}
-
-@keyframes cover4 {
-from {
-background-position: 0 0;
-}
-to {
-background-position: -300px 0;
-}
-}
-@-webkit-keyframes cover4 /*Safari and Chrome*/ {
-from {
-background-position: 0 0;
-}
-to {
-background-position: -300px 0;
-}
-}
-
 </style>
 </head>
 <body>
@@ -180,79 +91,28 @@ background-position: -300px 0;
         <div class="slide inline">
           <div id="bottom"></div>
         </div>
-        <div class="motto inline"></div>
+        <div class="motto inline">
+          <div class="flip_contain box_size">
+            <div class="fliper"> <img class="front" src="image/wenyi/1.jpg"/> <img class="back" src="image/wenyi/2.jpg"/> </div>
+            <img class="blank" src="image/wenyi/blank.jpg"/> </div>
+          <div class="flip_contain2 box_size">
+            <div class="fliper"><img class="" src="image/wenyi/2.jpg"/></div>
+            <img class="blank" src="image/wenyi/blank.jpg"/> </div>
+            <div class="flip_contain2 box_size">
+            <div class="fliper"><img class="" src="image/wenyi/2.jpg"/></div>
+            <img class="blank" src="image/wenyi/blank.jpg"/> </div>
+            <div class="flip_contain2 box_size">
+            <div class="fliper"><img class="" src="image/wenyi/2.jpg"/></div>
+            <img class="blank" src="image/wenyi/blank.jpg"/> </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <script src="js/head.js" type="text/javascript"></script> 
+<script src="js/slide_1.js" type="text/javascript"></script> 
 <script>
   
-  function getStyle(ele){
-	  var style=null;
-	  if(window.getComputedStyle){
-		  
-		  style=window.getComputedStyle(ele,null);
-		  	  
-		  }else{
-			  
-		  style=ele.currentStyle;  
-			  
-			  }
-	  return style;
-	  
-	  }
-
-  var index=1;
-  function slide(){
-			  var bottom=document.getElementById("bottom");
-			  var slider=document.getElementsByClassName("slide")[0];
-			  //同一个对象不能被appand多次，多次等于添加一次
-			  var bottom_clone=bottom.cloneNode(true);			  
-              slider.appendChild(bottom_clone);
-			  
-			  bottom_clone=bottom_clone.cloneNode(true);			  
-			  slider.appendChild(bottom_clone);
-			  
-			  bottom_clone=bottom_clone.cloneNode(true);
-			  slider.appendChild(bottom_clone);
-			  
-			  bottom_clone=bottom_clone.cloneNode(true);
-			  slider.appendChild(bottom_clone);
-			  
-			  var cover1=slider.children[1];
-			  var cover2=slider.children[2];
-			  var cover3=slider.children[3];
-			  var cover4=slider.children[4];
-			  
-			  cover1.className="cover1";
-			  cover2.className="cover2";
-			  cover3.className="cover3";
-			  cover4.className="cover4";
-			  
-			  
-			  
-			  
-			  index+=1;
-			  if(index>5){index=1} ;
-			  bottom.style.backgroundImage="url(image/"+index+".jpg)";
-			  
-			  setTimeout(del_cover,4000);
-			  
-			  function del_cover(){
-				  
-				  
-				  slider.removeChild(cover1);
-				  slider.removeChild(cover2);
-				  slider.removeChild(cover3);
-				  slider.removeChild(cover4);
-				  
-				  }
-			  
-			  }
-			  
-			  setInterval(slide,5000);
-
 </script>
 </body>
 </html>
