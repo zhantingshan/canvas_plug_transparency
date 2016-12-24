@@ -10,7 +10,7 @@
    var maskSpeedX=0;  
    var maskSpeedY=0;  
    var MASK_R=25;
-   var mask_bgcolor='rgba(139,139,122,0.8)';
+   var mask_bgcolor='rgba(139,139,122,0.7)';
    
     /*??有时CANVAS_WIDTH！=document.getElementsByClassName('head')[0].clientWidth；
      i don't know why,是因为body没设overflow:hidden;？*/

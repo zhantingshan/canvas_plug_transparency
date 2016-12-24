@@ -10,7 +10,13 @@
 	/* flip the pane when hovered */
 	.flip-container:hover .flipper, .flip-container.hover .flipper {
 		transform: rotateY(180deg);
+		-moz-transform: perspective(500px) rotateY(180deg);
+	    -ms-transform: perspective(500px) rotateY(180deg);
 	}
+	
+	
+	
+	
 
 .flip-container, .front, .back {
 	width: 320px;
@@ -26,10 +32,17 @@
 	position: relative;
 }
 
+.front, .back {
+	transform-style: preserve-3d;
+    transition: 0.6s;
+	}
+
 /* hide back of pane during swap */
 .front, .back {
 	backface-visibility: hidden;
-
+    -webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
