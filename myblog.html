@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html> <head>
+ <meta charset="gbk">
+ <title>实现的遮罩动画</title>
+<style>
+body{ margin:0; padding:0; width:100%;}
+.head{ height:250px; background-image:url(head.jpg); background-position:center; background-repeat: no-repeat; background-size: cover; position:absolute; top:0; width:100%}
+canvas { display: block; }
+</style>
+<script></script>
+</head>
+<body>
+<div class="head"></div>
+
+<script> 
+var imageCanvas;  
+   var maskCanvas;  
+   var imageContext;  
+   var maskContext;  
+   var frameCount=0;  
+   var nextFrames=0;  
+   var maskX=225;  
+   var maskY=160;  
+   var maskSpeedX=0;  
+   var maskSpeedY=0;  
+   var MASK_R=25;
+   
+    /*??有时CANVAS_WIDTH！=document.getElementsByClassName('head')[0].clientWidth；
+	 i don't know why*/
+   var CANVAS_WIDTH=document.getElementsByClassName('head')[0].clientWidth;
+     
+   var CANVAS_HEIGHT=250;  
+   var word_speed=1;
+   var speed=1;
+   var word_size=16;
+   var jump_hight=10;
+   var jumpx;
+   var jumpy;
+   var wordx=0;
+   var wordy=225;
+   var word_angle;
+   var word_flag=0;//0-up,1-dowm
+   
+   //此参数不能用，原因ditto，直接用document.getElementsByClassName('head')[0].clientWidth*4可行
+   var max_wordx=CANVAS_WIDTH*0.4
+   var timer
+   
+   
+            function pageInit(){  
+			
+			
+			    //创建图片canvas标签  
+                maskCanvas=document.createElement("canvas");  
+                maskCanvas.width=CANVAS_WIDTH;  
+                maskCanvas.height=CANVAS_HEIGHT;  
+                document.body.appendChild(maskCanvas);  
+                maskCanvas.style.position="absolute";  
+                maskContext=maskCanvas.getContext("2d");  
+   
+                resetSpeed();  
+                timer =setInterval(moveMask,20);  
+            }  
+   
+            function resetSpeed(){  
+                maskSpeedX=Math.random()*10-5;  
+                maskSpeedY=Math.random()*10-5;  
+   
+                resetNextFrames();  
+            }  
+   
+            function resetNextFrames(){  
+                nextFrames=Math.random()*125+25;  
+            }  
+   
+            function moveMask(){  
+                //在给定矩形内清空一个矩形,清空原来的can：
+                maskContext.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);  
+				//下面覆盖上面
+                maskContext.globalCompositeOperation="source-over";  
+                maskContext.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);  
+				//上面覆盖下面
+                maskContext.globalCompositeOperation="destination-out"; 
+				//设置填充色
+				maskContext.fillStyle='rgba(205,198,115,0.8)';
+				//执行填充 
+                maskContext.fill(); 
+				//重置当前的路径
+                maskContext.beginPath(); 
+				//1和2代表圆心坐标.3是圆的半径.4代表圆周起始位置.0 PI就是起始位置.沿顺时针路线,分别是0.5 PI（正下方）,1 PI和1.5 PI（正上方）,为画饼图提供了扇形范围的依据.第五个参数是弧长Math.PI*2就是整个圆,Math.PI是半圆.第六个参数是一个布尔值,true是顺时针false是顺时针. 
+                maskContext.arc(maskX,maskY,MASK_R,0,Math.PI*2,true); 
+				//设置字体粗细大小
+			    maskContext.font = 'bold '+word_size+'px arial';
+                maskContext.textAlign = 'left';
+                maskContext.textBaseline = 'top';
+				//写文字w3school.com.cn ，坐标10,90
+                maskContext.fillText("ZTS.blog",wordx,wordy);
+								
+                maskX+=maskSpeedX;  
+                maskY+=maskSpeedY;  
+   
+                if(maskX>=CANVAS_WIDTH-MASK_R){  
+				    //Math.abs取决对值
+                    maskSpeedX=-Math.abs(maskSpeedX);  
+                }  
+                if(maskX<=MASK_R){  
+                    maskSpeedX=Math.abs(maskSpeedX);  
+                }  
+                if(maskY>=CANVAS_HEIGHT-MASK_R){  
+                    maskSpeedY=-Math.abs(maskSpeedY);  
+                }  
+                if(maskY<=MASK_R){  
+                    maskSpeedY=Math.abs(maskSpeedY);  
+                }  
+                jump();
+                frameCount++;  
+				//重置速度
+                if(frameCount>nextFrames){  
+                    frameCount=0;  
+                    resetSpeed();  
+                }
+				
+				function jump(){			 
+			 
+			 //字体最大为145
+			 word_size+=1.5;
+			 if(word_size>=145){
+				 word_size=145;
+			 }
+			 
+			 
+			 //0-up,1-dowm
+			 if(!word_flag){
+				 jump_up();
+				 
+				 }else{
+					 
+			     jump_down(); 
+					 
+					 }
+			 
+			 
+			 
+			 function jump_up(){
+				 //上移角度约55度
+				 word_angle=0.3*Math.PI;
+				 //加速度，在顶时为1，在底到达最大然后开始减
+				 speed-=0.001;
+				 //原移动距离减去加速度，向上要减速
+				 word_speed+=speed;
+				 
+				 //文字移动的距离
+			    jumpx=Math.cos(word_angle) * word_speed;
+			    jumpy=Math.sin(word_angle) * word_speed;
+				 			 
+				 //文字加上移动的距离
+				 wordx+=jumpx;
+		         wordy=wordy-jumpy; 
+				 
+				 				      
+				 }
+			  
+			  function jump_down(){
+				  //下移角度约20度
+				  word_angle=0.1*Math.PI;
+				  speed+=0.01;
+				 //原移动距离减去加速度，向下要加速 
+				 word_speed+=speed; 
+				 
+				 //文字移动的距离
+			     jumpy=Math.cos(word_angle) * word_speed;
+			     jumpx=-Math.sin(word_angle) * word_speed;
+				 
+				 //文字减去移动的距离 
+				 wordx+=jumpx;
+		         wordy+=jumpy; 
+				 
+				 
+				
+				 				 
+				 }
+			  
+			  
+			  if(wordy<=jump_hight)
+			  {  	
+			      word_flag=1;      
+				  
+			   }
+			   
+			   //设置字体底部位置
+			   if(wordy+word_size>=250)
+			  {  
+			     //保证跳动不超底
+			     wordy=250-word_size;	
+			     word_flag=0;
+				 //每次所跳最高点降低
+			     jump_hight+=10;
+				 //速度重置			                 
+				 speed=1;
+				 
+				  
+				  			  
+			   }
+			   
+			   //设置字体的停止位置
+			   if(wordx>=document.getElementsByClassName('head')[0].clientWidth*0.4){	
+				     wordx=document.getElementsByClassName('head')[0].clientWidth*0.4-1;
+					 wordy=250-word_size;
+					 clearInterval(timer);
+					 moveMask();
+				} 
+			  
+			  
+			  }
+				
+				
+				  
+            }  
+          pageInit();
+		  
+		  
+		  
+</script>
+</body> 
+</html>
